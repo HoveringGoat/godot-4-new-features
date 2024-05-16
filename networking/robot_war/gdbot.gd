@@ -9,6 +9,7 @@ var turning_speed := 0.01
 var damage_tick := INVULNERABILITY_TICK_DURATION
 
 @export var forward_speed := 0.0
+@export var sideways_speed := 0.0
 @export var damage_amount := 0.0
 @export var is_attacking := false
 
@@ -84,7 +85,8 @@ func _physics_process(delta: float) -> void:
 			input_dir = Input.get_vector("move_right", "move_left", "move_down", "move_up")
 
 		forward_speed = input_dir.y
-		var direction := (transform.basis * Vector3(0, 0, forward_speed)).normalized()
+		sideways_speed = input_dir.x
+		var direction := (transform.basis * Vector3(sideways_speed, 0, forward_speed)).normalized()
 
 		velocity = direction * speed
 	
